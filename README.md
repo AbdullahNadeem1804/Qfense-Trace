@@ -34,53 +34,53 @@ Compiles forensic matches into executive PDF threat summaries and structured mul
   ## Architecture
 
 ```text
-                ┌──────────────────────────────┐
-                │       Windows EVTX Logs      │
-                │      (File / Folder)         │
-                └──────────────┬───────────────┘
-                               │
-                               ▼
-                ┌──────────────────────────────┐
-                │     Rust PyEvtxParser        │
-                │          Stream              │
-                └──────────────┬───────────────┘
-                               │
-                               ▼
-                ┌──────────────────────────────┐
-                │      Unified Event Schema    │
-                │     (NormalizedEvent)        │
-                └──────────────┬───────────────┘
-                               │
-              ┌────────────────┴──────────────────────┐
-              ▼                                       ▼
-┌────────────────────────────────┐    ┌────────────────────────────────┐
-│ Layer 1: Sigma Matcher         │    │ Layer 2: Stateful CEP          │
-│                                │    │                                │
-│ • AST-compiled conditions      │    │ • Sliding time windows         │
-│ • EventID routing              │    │ • Attack sequences             │
-│ • Multi-folder rule bundles    │    │ • Memory-bounded               │
-│                                │    │                                │
-│                                │    │                                │
-└────────────────┬───────────────┘    └─────────────────┬──────────────┘
-                 │                                      │
-                 └──────────────────┬───────────────────┘
-                                    ▼
-                       ┌─────────────────────────┐
-                       │   Alert / Evidence      │
-                       │          Queue          │
-                       └────────────┬────────────┘
-                                    │
-                           ┌────────┴────────┐
-                           ▼                 ▼
-                ┌──────────────────────┐  ┌──────────────────────┐
-                │   CustomTkinter GUI  │  │ Forensic Export      │
-                │                      │  │ Engine               │
-                │ • Live threat cards  │  │                      │
-                │ • Virtualized memory │  │ • Executive PDF      │
-                │   caps               │  │   summary            │
-                │                      │  │ • Structured Excel   │
-                │                      │  │   logs               │
-                └──────────────────────┘  └──────────────────────┘
+                                ┌──────────────────────────────┐
+                                │       Windows EVTX Logs      │
+                                │      (File / Folder)         │
+                                └──────────────┬───────────────┘
+                                               │
+                                               ▼
+                                ┌──────────────────────────────┐
+                                │     Rust PyEvtxParser        │
+                                │          Stream              │
+                                └──────────────┬───────────────┘
+                                               │
+                                               ▼
+                                ┌──────────────────────────────┐
+                                │      Unified Event Schema    │
+                                │     (NormalizedEvent)        │
+                                └──────────────┬───────────────┘
+                                               │
+                              ┌────────────────┴──────────────────────┐
+                              ▼                                       ▼
+                ┌────────────────────────────────┐    ┌────────────────────────────────┐
+                │ Layer 1: Sigma Matcher         │    │ Layer 2: Stateful CEP          │
+                │                                │    │                                │
+                │ • AST-compiled conditions      │    │ • Sliding time windows         │
+                │ • EventID routing              │    │ • Attack sequences             │
+                │ • Multi-folder rule bundles    │    │ • Memory-bounded               │
+                │                                │    │                                │
+                │                                │    │                                │
+                └────────────────┬───────────────┘    └─────────────────┬──────────────┘
+                                 │                                      │
+                                 └──────────────────┬───────────────────┘
+                                                    ▼
+                                       ┌─────────────────────────┐
+                                       │   Alert / Evidence      │
+                                       │          Queue          │
+                                       └────────────┬────────────┘
+                                                    │
+                                           ┌────────┴────────┐
+                                           ▼                 ▼
+                                ┌──────────────────────┐  ┌──────────────────────┐
+                                │   CustomTkinter GUI  │  │ Forensic Export      │
+                                │                      │  │ Engine               │
+                                │ • Live threat cards  │  │                      │
+                                │ • Virtualized memory │  │ • Executive PDF      │
+                                │   caps               │  │   summary            │
+                                │                      │  │ • Structured Excel   │
+                                │                      │  │   logs               │
+                                └──────────────────────┘  └──────────────────────┘
 ```
 
 
